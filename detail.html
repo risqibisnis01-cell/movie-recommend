@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Dossier — CineLuxe Archive</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://image.tmdb.org">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="CineLuxe Archive">
+        <div class="brand-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </div>
+        <span class="brand-name">CineLuxe</span>
+        <span class="brand-tag">Dossier View</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="add.html" class="btn btn-secondary" title="Add new film recommendation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add Film</span>
+        </a>
+        <a href="index.html" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back to Catalog</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Backdrop Section -->
+  <section class="detail-hero-section">
+    <div class="detail-backdrop-bg">
+      <img id="detailBackdropImg" class="detail-backdrop-img" src="" alt="Movie Backdrop">
+      <div class="detail-gradient"></div>
+    </div>
+
+    <!-- Main Movie Spotlight Header -->
+    <div class="detail-main-container">
+      <!-- Poster -->
+      <div class="detail-poster-container">
+        <img id="detailPosterImg" class="detail-poster-img" src="" alt="Movie Poster">
+      </div>
+
+      <!-- Main Info Column -->
+      <div class="detail-info-col">
+        <div class="detail-specs-bar">
+          <span id="detailRating" class="detail-score"></span>
+          <span id="detailYear"></span>
+          <span>•</span>
+          <span id="detailDuration"></span>
+          <span>•</span>
+          <span id="detailDirectorTop"></span>
+        </div>
+
+        <h1 id="detailTitle" class="detail-title"></h1>
+        <p id="detailTagline" class="detail-tagline"></p>
+
+        <div id="detailGenres" class="card-genres" style="margin-top: 4px;"></div>
+
+        <!-- Interactive Action Buttons -->
+        <div class="detail-action-buttons">
+          <!-- Primary: Watch / Link to View -->
+          <a id="btnWatchDirect" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="Open source viewing destination">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Watch / Link to View</span>
+          </a>
+
+          <!-- Video Player Modal Trigger -->
+          <button id="btnOpenPlayer" class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Play Trailer</span>
+          </button>
+
+          <!-- Add to Watchlist Toggle -->
+          <button id="btnToggleWatchlist" class="btn btn-secondary">
+            <svg id="watchlistIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span id="watchlistBtnText">Add to Watchlist</span>
+          </button>
+
+          <!-- Share Button -->
+          <button id="btnShare" class="btn btn-ghost btn-icon" title="Copy archive link" aria-label="Share Film">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Content Body -->
+  <main class="detail-content-body">
+    
+    <!-- Left Column: Story & Cast -->
+    <div class="detail-synopsis-block">
+      <div>
+        <h2 class="content-heading">
+          <span>01. Narrative Synopsis</span>
+        </h2>
+        <p id="detailSynopsis" class="synopsis-text" style="margin-top: 14px;"></p>
+      </div>
+
+      <div>
+        <h2 class="content-heading">
+          <span>02. Starring Ensemble</span>
+        </h2>
+        <div id="detailCastList" class="cast-grid"></div>
+      </div>
+    </div>
+
+    <!-- Right Column: Sidebar Archival Dossier -->
+    <aside class="sidebar-metadata-card">
+      <div style="font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        Technical Dossier
+      </div>
+
+      <div class="meta-field">
+        <span class="meta-label">Director</span>
+        <span id="detailDirector" class="meta-val"></span>
+      </div>
+
+      <div class="meta-field">
+        <span class="meta-label">Release Year</span>
+        <span id="detailMetaYear" class="meta-val"></span>
+      </div>
+
+      <div class="meta-field">
+        <span class="meta-label">Runtime</span>
+        <span id="detailMetaDuration" class="meta-val"></span>
+      </div>
+
+      <div class="meta-field">
+        <span class="meta-label">Critic Rating</span>
+        <span id="detailMetaScore" class="meta-val"></span>
+      </div>
+
+      <div class="meta-field">
+        <span class="meta-label">Source Viewing Destination</span>
+        <a id="detailMetaLink" href="#" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-amber); word-break: break-all; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;">
+          <span>Open External Destination</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Curated Related Recommendations Section -->
+  <section class="related-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span>Curated Recommendations</span>
+      </h2>
+      <span class="section-counter">Related Archive Entries</span>
+    </div>
+    <div id="relatedGrid" class="movie-grid"></div>
+  </section>
+
+  <!-- Video Trailer Modal Player (Clean, darkroom framing) -->
+  <div id="videoModal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-dialog video-modal-dialog">
+      <button id="btnCloseVideo" class="btn btn-secondary btn-icon" style="position: absolute; top: 12px; right: 12px; z-index: 10;" aria-label="Close video player">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <iframe id="videoIframe" class="video-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-badge">
+        <span>CINELUXE ARCHIVE</span>
+        <span>•</span>
+        <span>TECHNICAL DOSSIER VIEW</span>
+      </div>
+      <div>
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: underline;">Return to Master Catalog</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>

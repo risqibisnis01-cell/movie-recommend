@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineLuxe — Film Archive & Curated Recommendations</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://image.tmdb.org">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="CineLuxe Film Archive">
+        <div class="brand-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </div>
+        <span class="brand-name">CineLuxe</span>
+        <span class="brand-tag">Archive 2024</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="add.html" class="btn btn-primary" title="Add new film recommendation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add Film</span>
+        </a>
+
+        <button id="btnExportJson" class="btn btn-secondary btn-icon" title="Export database as JSON" aria-label="Export JSON">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </button>
+
+        <button id="btnResetCatalog" class="btn btn-ghost btn-icon" title="Reset to standard catalog" aria-label="Reset Collection">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Editorial Spotlight Section -->
+  <section id="heroSection" class="hero-spotlight" aria-label="Featured Selection">
+    <div class="hero-backdrop-wrapper">
+      <img id="heroBackdropImg" class="hero-backdrop-img" src="" alt="Hero Backdrop">
+      <div class="hero-gradient-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-archival-header">
+        <span>Curator's Showcase Selection</span>
+        <div id="heroRating" class="hero-rating-badge"></div>
+      </div>
+      <h1 id="heroTitle" class="hero-title"></h1>
+      <p id="heroTagline" class="hero-tagline"></p>
+      
+      <div class="hero-meta-bar">
+        <span id="heroYear"></span>
+        <span>•</span>
+        <span id="heroDuration"></span>
+        <span>•</span>
+        <span id="heroGenres"></span>
+      </div>
+
+      <div class="hero-actions">
+        <a id="heroViewLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Watch Official Trailer</span>
+        </a>
+        <a id="heroDetailLink" href="#" class="btn btn-secondary">
+          <span>View Film Dossier</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Catalog Content -->
+  <main class="main-content">
+    
+    <!-- Controls Toolbar -->
+    <div class="controls-panel">
+      <div class="search-row">
+        <div class="search-box-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search archive by title, director, or cast..." autocomplete="off">
+          <span class="search-kbd" title="Press / to focus">/</span>
+        </div>
+
+        <div class="filter-actions">
+          <div class="sort-select-wrapper">
+            <select id="sortSelect" class="sort-select" aria-label="Sort catalog">
+              <option value="rating-desc">Sort: Highest Rated</option>
+              <option value="year-desc">Sort: Release Year (Newest)</option>
+              <option value="year-asc">Sort: Release Year (Oldest)</option>
+              <option value="title-asc">Sort: Title (A-Z)</option>
+            </select>
+            <svg class="sort-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segmented Genre Filter Tabs (Architectural, No floating capsules) -->
+      <div id="genrePills" class="genre-pills-bar" role="tablist">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 id="catalogHeading" class="section-title">
+        <span>Catalog Archive</span>
+      </h2>
+      <span id="catalogCount" class="section-counter">Loading...</span>
+    </div>
+
+    <!-- Movie Grid -->
+    <div id="movieGrid" class="movie-grid" aria-live="polite">
+      <!-- Rendered dynamically -->
+    </div>
+
+  </main>
+
+  <!-- Add Movie Modal (Architectural matte surface, no slop blur) -->
+  <div id="addMovieModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="addModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="addModalTitle" class="modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-vermilion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+          </svg>
+          <span>Catalog New Film Entry</span>
+        </h3>
+        <button id="btnCloseAddModal" class="btn btn-ghost btn-icon" aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="addMovieForm" class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="movieTitle">01. Movie Title <span class="req">*</span></label>
+          <input type="text" id="movieTitle" class="form-input" placeholder="e.g. Arrival" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="movieTagline">02. Editorial Tagline</label>
+          <input type="text" id="movieTagline" class="form-input" placeholder="e.g. Why are they here?">
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="movieYear">03. Year <span class="req">*</span></label>
+            <input type="number" id="movieYear" class="form-input" min="1900" max="2030" value="2024" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="movieRating">04. Score (0–10) <span class="req">*</span></label>
+            <input type="number" id="movieRating" class="form-input" min="1" max="10" step="0.1" value="8.0" required>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="movieDuration">05. Runtime</label>
+            <input type="text" id="movieDuration" class="form-input" placeholder="e.g. 1h 56m">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="movieGenres">06. Genres (comma separated) <span class="req">*</span></label>
+            <input type="text" id="movieGenres" class="form-input" placeholder="Sci-Fi, Drama, Mystery" required>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="movieDirector">07. Director</label>
+            <input type="text" id="movieDirector" class="form-input" placeholder="e.g. Denis Villeneuve">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="movieCast">08. Starring Cast</label>
+            <input type="text" id="movieCast" class="form-input" placeholder="Amy Adams, Jeremy Renner">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="moviePosterUrl">09. Poster Image URL <span class="req">*</span></label>
+          <input type="url" id="moviePosterUrl" class="form-input" placeholder="https://image.tmdb.org/... or verified image URL" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="movieBackdropUrl">10. Backdrop / Still URL (optional)</label>
+          <input type="url" id="movieBackdropUrl" class="form-input" placeholder="Wide landscape frame URL">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="movieViewUrl">11. Viewing / Trailer Link <span class="req">*</span></label>
+          <input type="url" id="movieViewUrl" class="form-input" placeholder="https://www.youtube.com/watch?v=... or official streaming link" required>
+        </div>
+
+        <div id="posterPreviewRow" class="image-preview-container" style="display: none;">
+          <img id="posterPreviewImg" class="image-preview-thumb" src="" alt="Poster preview">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;">Image Source Verified</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Aspect ratio: Portrait (2:3 standard)</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="movieSynopsis">12. Synopsis & Context <span class="req">*</span></label>
+          <textarea id="movieSynopsis" class="form-textarea" rows="3" placeholder="Plot summary and curatorial notes..." required></textarea>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" id="btnCancelAdd" class="btn btn-ghost">Cancel</button>
+        <button type="submit" form="addMovieForm" class="btn btn-primary">
+          <span>Commit to Archive</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-badge">
+        <span>CINELUXE ARCHIVE</span>
+        <span>•</span>
+        <span>CURATED FILM RECOMMENDATIONS</span>
+      </div>
+      <div>
+        <span>INDEXED IN LOCAL JSON STORE</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
