@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnToggleWatchlist = document.getElementById('btnToggleWatchlist');
   const watchlistIcon = document.getElementById('watchlistIcon');
   const watchlistBtnText = document.getElementById('watchlistBtnText');
+  const btnEditFilm = document.getElementById('btnEditFilm');
   const btnShare = document.getElementById('btnShare');
 
   const videoModal = document.getElementById('videoModal');
@@ -113,6 +114,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Action Links
     btnWatchDirect.href = currentMovie.viewUrl;
+    if (btnEditFilm) {
+      btnEditFilm.href = `edit.html?id=${encodeURIComponent(currentMovie.id)}`;
+    }
 
     // Watchlist State
     updateWatchlistButtonState();

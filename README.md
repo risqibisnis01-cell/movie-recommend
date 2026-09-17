@@ -4,28 +4,33 @@ A movie recommendation web application built with HTML5, CSS3, vanilla JavaScrip
 
 ## Features
 
-- **3 Dedicated Pages**:
+- **4 Dedicated Pages**:
   - **Movie Catalog (`index.html`)**:
     - **Hero Spotlight**: Featured movie recommendation banner with atmospheric backdrop and instant watch/details action.
     - **Live Fuzzy Search**: Filter by title, director, cast, or genre. Keyboard shortcut `/` to focus search instantly.
     - **Category Tabs**: Filter by genres or view your personal **Watchlist**.
     - **Sorting Selector**: Highest Rated, Newest, Classic, and Alphabetical (A-Z).
-    - **Movie Card Grid**: Smooth staggered entrances, hover elevation, star rating badge, watchlist toggle, and direct play button.
+    - **Movie Card Grid**: Staggered entrances, hover action bar (`Trailer`, `Edit`, `Save`), and rating badge.
     - **JSON Export & Reset**: One-click "Export JSON" button to download `movies.json` with all saved changes, plus reset to default seed.
   - **Detail Page (`detail.html`)**:
     - Accessible via `detail.html?id=<movie-id>`.
     - Immersive full-bleed backdrop with dark gradient vignettes.
     - High-resolution movie poster with specular border.
-    - **Link to View / Watch CTA**: Direct link to external stream/trailer + built-in interactive video player modal for YouTube trailers.
+    - **Action Controls**: "Watch / Link to View", "Play Trailer" modal, "Add to Watchlist", and direct **"Edit Entry"** link.
     - Comprehensive metadata: Critic score, release year, runtime, director, genre tags, storyline, and starring cast badges.
     - **"More Like This" Recommendations**: Curated similar movies based on overlapping genres and director.
-    - Interactive **Watchlist** toggle and **Share** button.
   - **Add Film Studio Page (`add.html`)**:
     - Full-page archival submission studio for new film recommendations.
     - **Sectioned Dossier Form**: Film identification, credits & personnel, media assets & viewing links, and narrative synopsis.
     - **Live Real-time Preview Stage**: Instant rendering of the movie card, score tag, and backdrop frame as inputs change.
     - **Interactive Verification**: Pre-commit validation checklist and live "Test Link" action to test streaming/trailer URLs.
     - Direct persistence into the JSON catalog with instant redirect to the new film's detail dossier.
+  - **Edit Film Studio Page (`edit.html`)**:
+    - Accessible via `edit.html?id=<movie-id>` or from any card's "Edit" action button or the detail page.
+    - Pre-populates all existing metadata, posters, viewing URLs, and synopsis.
+    - Live real-time preview reflecting edits instantly.
+    - Save updates to the JSON archive with confirmation toasts.
+    - Safe "Delete Film Entry" action with confirmation dialog.
 
 ## Design Engineering Polish (`emil-design-eng`)
 

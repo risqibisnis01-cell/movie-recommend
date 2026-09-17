@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Film Entry — CineLuxe Archive</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://image.tmdb.org">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="CineLuxe Archive">
+        <div class="brand-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </div>
+        <span class="brand-name">CineLuxe</span>
+        <span class="brand-tag">Editorial Revision</span>
+      </a>
+
+      <div class="header-actions">
+        <a id="navBackDetail" href="index.html" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span id="navBackText">View Film Dossier</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="main-content" style="padding-top: 40px;">
+    
+    <!-- Breadcrumb & Header Title -->
+    <div class="page-title-header">
+      <div class="header-meta-breadcrumb">
+        <span>ARCHIVE REPOSITORY</span>
+        <span>/</span>
+        <span>EDIT DOSSIER</span>
+        <span>/</span>
+        <span id="breadcrumbFilmId" style="color: var(--accent-amber);">LOADING...</span>
+      </div>
+      <h1 class="page-main-title" id="pageTitleText">Edit Film Entry</h1>
+      <p class="page-main-subtitle">
+        Modify film metadata, update poster artwork, adjust critical scores, or update viewing destinations. Changes persist immediately to the JSON database.
+      </p>
+    </div>
+
+    <!-- 2-Column Curatorial Studio Layout -->
+    <div class="add-film-studio-grid">
+      
+      <!-- Left Column: Dossier Form -->
+      <div class="form-dossier-card">
+        <form id="editFilmForm" autocomplete="off">
+
+          <!-- Section 01: Identification -->
+          <div class="dossier-section">
+            <div class="dossier-section-heading">
+              <span class="section-num">01</span>
+              <span>Film Identification</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editTitle">Movie Title <span class="req">*</span></label>
+              <input type="text" id="editTitle" class="form-input" placeholder="e.g. Dune: Part Two" required autofocus>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editTagline">Editorial Tagline</label>
+              <input type="text" id="editTagline" class="form-input" placeholder="e.g. Long live the fighters.">
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editYear">Release Year <span class="req">*</span></label>
+                <input type="number" id="editYear" class="form-input" min="1890" max="2035" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editRating">Score / Rating (0–10) <span class="req">*</span></label>
+                <input type="number" id="editRating" class="form-input" min="1" max="10" step="0.1" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editDuration">Runtime Duration</label>
+                <input type="text" id="editDuration" class="form-input" placeholder="e.g. 2h 46m">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editGenres">Genres (comma separated) <span class="req">*</span></label>
+                <input type="text" id="editGenres" class="form-input" placeholder="Sci-Fi, Adventure, Drama" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 02: Credits -->
+          <div class="dossier-section">
+            <div class="dossier-section-heading">
+              <span class="section-num">02</span>
+              <span>Credits & Personnel</span>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editDirector">Director <span class="req">*</span></label>
+                <input type="text" id="editDirector" class="form-input" placeholder="e.g. Denis Villeneuve" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editCast">Starring Cast (comma separated)</label>
+                <input type="text" id="editCast" class="form-input" placeholder="Timothée Chalamet, Zendaya, Rebecca Ferguson">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 03: Media URLs -->
+          <div class="dossier-section">
+            <div class="dossier-section-heading">
+              <span class="section-num">03</span>
+              <span>Media Assets & Viewing Destination</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editPosterUrl">
+                Foto URL (Portrait Poster Artwork) <span class="req">*</span>
+              </label>
+              <input type="url" id="editPosterUrl" class="form-input" placeholder="https://image.tmdb.org/t/p/w780/..." required>
+              <span class="input-hint">Aspect ratio: standard portrait 2:3. Live preview updates on the right.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editBackdropUrl">
+                Backdrop / Banner Frame URL (Optional)
+              </label>
+              <input type="url" id="editBackdropUrl" class="form-input" placeholder="https://image.tmdb.org/t/p/w1280/... or wide landscape image">
+              <span class="input-hint">Widescreen still for the detail page header background.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editViewUrl">
+                Link to View / Watch (Trailer or Streaming Link) <span class="req">*</span>
+              </label>
+              <div class="input-with-action">
+                <input type="url" id="editViewUrl" class="form-input" placeholder="https://www.youtube.com/watch?v=... or streaming link" required>
+                <button type="button" id="btnTestViewLink" class="btn btn-secondary" title="Verify destination link">
+                  <span>Test Link</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+              </div>
+              <span class="input-hint">Official streaming or YouTube trailer watch link.</span>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label" for="editFeatured">
+                <input type="checkbox" id="editFeatured" class="custom-checkbox">
+                <span class="checkbox-text">Set as Featured Spotlight Recommendation on Home Page</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 04: Synopsis -->
+          <div class="dossier-section">
+            <div class="dossier-section-heading">
+              <span class="section-num">04</span>
+              <span>Narrative Context</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editSynopsis">Synopsis / Plot Summary <span class="req">*</span></label>
+              <textarea id="editSynopsis" class="form-textarea" rows="4" placeholder="Comprehensive plot overview, critical themes, and curatorial recommendation..." required></textarea>
+            </div>
+          </div>
+
+          <!-- Form Action Bar -->
+          <div class="form-action-bar" style="justify-content: space-between;">
+            <div>
+              <button type="button" id="btnDeleteFilm" class="btn btn-ghost" style="color: var(--accent-vermilion); border: 1px solid rgba(230, 57, 47, 0.3);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>Delete Film Entry</span>
+              </button>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <a id="btnCancelEdit" href="index.html" class="btn btn-ghost">Cancel</a>
+              <button type="submit" class="btn btn-primary" id="btnSubmitEdit">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Save Changes</span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Right Column: Live Real-Time Card & Asset Preview Stage -->
+      <aside class="live-preview-sidebar">
+        
+        <div class="preview-stage-header">
+          <div class="preview-badge">REVISED ENTRY PREVIEW</div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);" id="previewArchiveId">ID: —</span>
+        </div>
+
+        <!-- Rendered Card Preview -->
+        <div class="preview-card-wrapper">
+          <article class="movie-card preview-card-actual" id="previewCard">
+            <div class="card-poster-wrapper">
+              <img id="previewPosterImg" class="poster-img" src="" alt="Film poster preview">
+              <div class="card-index-tag" id="previewCardIndexTag">EDITING</div>
+              <div class="card-score-tag" id="previewScoreTag">8.5</div>
+              
+              <div class="card-action-bar" style="opacity: 1; transform: translateY(0);">
+                <span class="card-action-btn">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <span>Trailer Link</span>
+                </span>
+                <span class="card-action-btn">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>Active</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title" id="previewTitle">Movie Title</h3>
+              <div class="card-director" id="previewDirector">Director Name</div>
+              
+              <div class="card-meta-row">
+                <span id="previewYear">2024</span>
+                <span id="previewDuration">2h 00m</span>
+              </div>
+              
+              <div class="card-genres" id="previewGenres">
+                <span class="genre-tag">Genre</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Backdrop Still Preview Box -->
+        <div class="backdrop-preview-box">
+          <div class="backdrop-box-label">Backdrop Header Still:</div>
+          <div class="backdrop-preview-frame">
+            <img id="previewBackdropImg" src="" alt="Backdrop still">
+            <span class="backdrop-frame-tag" id="backdropStatusTag">Backdrop Verified</span>
+          </div>
+        </div>
+
+        <!-- Verification Checklist -->
+        <div class="dossier-checklist">
+          <div class="checklist-title">Pre-Commit Verification</div>
+          <div class="checklist-item" id="checkTitle">
+            <span class="check-dot"></span>
+            <span>Title & Year specified</span>
+          </div>
+          <div class="checklist-item" id="checkDirector">
+            <span class="check-dot"></span>
+            <span>Director assigned</span>
+          </div>
+          <div class="checklist-item" id="checkGenres">
+            <span class="check-dot"></span>
+            <span>Genres tagged</span>
+          </div>
+          <div class="checklist-item" id="checkPoster">
+            <span class="check-dot"></span>
+            <span>Foto URL (Poster) active</span>
+          </div>
+          <div class="checklist-item" id="checkViewLink">
+            <span class="check-dot"></span>
+            <span>Link to View verified</span>
+          </div>
+          <div class="checklist-item" id="checkSynopsis">
+            <span class="check-dot"></span>
+            <span>Synopsis provided</span>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-badge">
+        <span>CINELUXE ARCHIVE</span>
+        <span>•</span>
+        <span>FILM REVISION STUDIO</span>
+      </div>
+      <div>
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: underline;">Browse Catalog</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/edit.js"></script>
+</body>
+</html>

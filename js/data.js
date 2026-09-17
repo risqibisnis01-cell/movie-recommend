@@ -346,6 +346,40 @@ class MovieDataService {
     return newMovie;
   }
 
+  async updateMovie(id, updatedData) {
+    await this.readyPromise;
+    const index = this.movies.findIndex(m => m.id === id);
+    if (index === -1) {
+      throw new Error(`Film with ID "${id}" not found.`);
+    }
+
+    const existing = this.movies[index];
+    const updated = {
+      ...existing,
+      title: updatedData.title !== undefined ? updatedData.title.trim() : existing.title,
+      tagline: updatedData.tagline !== undefined ? updatedData.tagline.trim() : existing.tagline,
+      year: updatedData.year !== undefined ? parseInt(updatedData.year, 10) : existing.year,
+      rating: updatedData.rating !== undefined ? parseFloat(updatedData.rating) : existing.rating,
+      duration: updatedData.duration !== undefined ? updatedData.duration.trim() : existing.duration,
+      genres: updatedData.genres !== undefined
+        ? (Array.isArray(updatedData.genres) ? updatedData.genres : updatedData.genres.split(',').map(g => g.trim()).filter(Boolean))
+        : existing.genres,
+      director: updatedData.director !== undefined ? updatedData.director.trim() : existing.director,
+      cast: updatedData.cast !== undefined
+        ? (Array.isArray(updatedData.cast) ? updatedData.cast : (updatedData.cast || '').split(',').map(c => c.trim()).filter(Boolean))
+        : existing.cast,
+      synopsis: updatedData.synopsis !== undefined ? updatedData.synopsis.trim() : existing.synopsis,
+      posterUrl: updatedData.posterUrl !== undefined ? updatedData.posterUrl.trim() : existing.posterUrl,
+      backdropUrl: updatedData.backdropUrl !== undefined ? updatedData.backdropUrl.trim() : existing.backdropUrl,
+      viewUrl: updatedData.viewUrl !== undefined ? updatedData.viewUrl.trim() : existing.viewUrl,
+      featured: updatedData.featured !== undefined ? Boolean(updatedData.featured) : existing.featured
+    };
+
+    this.movies[index] = updated;
+    this.persist();
+    return updated;
+  }
+
   async deleteMovie(id) {
     await this.readyPromise;
     this.movies = this.movies.filter(m => m.id !== id);
